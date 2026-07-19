@@ -37,9 +37,10 @@ export default async function handler(req, res) {
       answer: response.choices[0].message.content,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: "Something went wrong",
-    });
-  }
+  console.error("Groq Error:", error);
+
+  res.status(500).json({
+    message: error?.error?.message || error.message || "Something went wrong",
+  });
+}
 }
