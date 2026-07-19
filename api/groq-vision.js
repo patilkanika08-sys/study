@@ -37,10 +37,11 @@ export default async function handler(req, res) {
       answer: response.choices[0].message.content,
     });
   } catch (error) {
-  console.error("Groq Error:", error);
+  console.error("FULL ERROR:", JSON.stringify(error, null, 2));
 
   res.status(500).json({
-    message: error?.error?.message || error.message || "Something went wrong",
+    error: error,
+    message: error.message,
   });
 }
 }
